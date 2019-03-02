@@ -1,0 +1,8 @@
+{
+  "name": "routes",
+  "author": "Jordan Hennessy",
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
