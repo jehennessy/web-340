@@ -22,28 +22,28 @@ app.set('view engine', 'ejs'); // tells express to use the view engine
 
 app.get('/', function(req, res){
   res.render('index', {
-    message: 'home page'
+    message: 'home page' // rendering a message for home
   });
 });
 
 app.get('/about', function(req, res){
   res.render('about', {
-    message: 'about page'
+    message: 'about page' // rendering a message for about
   });
 });
 
 app.get('/contact', function(req, res){
   res.render('contact', {
-    message: 'contact page'
+    message: 'contact page' // rendering a message for contact
   });
 });
 
 app.get('/products', function(req, res){
   res.render('products', {
-    message: 'products page'
+    message: 'products page' // rendering a message for products
   });
 });
 
-http.createServer(app).listen(8080, function(){
+http.createServer(app).listen(8080, function(){ // creating server
   console.log('Application started on port 8080.');
 });
