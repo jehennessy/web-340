@@ -17,7 +17,7 @@ var http = require('http');
 var app = express();
 
 
-
+// get request for json object
 app.get("/customer/:id", function(req, res){
   var id = parseInt(req.params.id, 10);
 
@@ -31,6 +31,8 @@ app.get("/customer/:id", function(req, res){
   });
 });
 
+
+// create server
 http.createServer(app).listen(8080, function() {
   console.log('The Application has started and is listening on port 8080.');
 });
