@@ -15,6 +15,7 @@ var path = require('path');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var Employee = require('./models/employee');
+var helmet = require('helmet');
 
 
 // mLab connection
@@ -33,9 +34,14 @@ db.once("open", function() {
 
 // application
 var app = express();
+
+// set statements
 app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// use statements
 app.use(logger('short'));
+app.use(helmet.xssFilter());
 
 
 // model
@@ -45,10 +51,11 @@ var employee = new Employee({
 });
 
 
-// Render homepage
+// http calls
 app.get('/', function(req, res) {
   res.render('index', {
-    title: 'Home page'
+    title: 'Home page',
+    message: "XSS Prevention Example"
   });
 });
 
