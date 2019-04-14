@@ -22,7 +22,7 @@ var csrf = require('csurf');
 
 
 // setup csrf protection
-var csrfProtection = csrf({cookie:true});
+var csrfProtection = csrf({cookie: true});
 
 // mLab connection
 var mongoDB = "mongodb+srv://Jordan:zasdoj-rohca5-curbyB@ems-rzluo.mongodb.net/test";
@@ -61,18 +61,21 @@ app.use(function(req, res, next) {
 });
 
 
-// model
-var employee = new Employee({
-  firstName: "Jill",
-  lastName: "Smith"
-});
-
 
 // http calls
 app.get('/', function(req, res) {
-  res.render('index', {
-    title: 'Home page',
-    message: "XSS Prevention Example"
+  Employee.find({}, function(error, employees) {
+    if (error) {
+      console.log(error);
+      throw error;
+    } else {
+      console.log(employees);
+     res.render("index", {
+        title: "Employee List",
+        message: "Employee Records",
+        employees: employees
+      });
+    }
   });
 });
 
@@ -83,9 +86,33 @@ app.get('/new', function(req, res) {
   });
 })
 
+
 app.post("/process", function(req,res) {
-  console.log(req.body.txtName);
-  res.redirect("/");
+  if(!req.body.firstName || !req.body.lastName){
+    res.status(400).send("Entries must have a name!");
+    return;
+  }
+
+  // get the request's form data
+  var firstName = req.body.firstName;
+  var lastName = req.body.lastName;
+  console.log(firstName + " " + lastName);
+
+  //create an employee model
+  var employees = new Employee({
+    firstName : firstName,
+    lastName: lastName });
+
+  // save
+  employees.save(function(error) {
+    if (error) {
+      console.log(error);
+      throw error
+    } else {
+      console.log(firstName + " " + lastName + "saved successfully!");
+      res.redirect('/');
+    };
+  });
 });
 
 // create server
