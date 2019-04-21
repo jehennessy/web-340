@@ -44,7 +44,7 @@ var app = express();
 // set statements
 app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.set("port", process.env.PORT || 8080);
+app.set('port', process.env.PORT || 8080);
 
 // use statements
 app.use(logger('short'));
@@ -135,5 +135,5 @@ app.post("/process", function(req,res) {
 
 // create server
 http.createServer(app).listen(app.get("port"), function(){
-  console.log('Application has started and is listening on port' + app.get("port"))
+  console.log('Application has started and is listening on port ' + app.get('port'));
 });
