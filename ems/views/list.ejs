@@ -1,5 +1,5 @@
 <% if  (employees.length > 0) { %>
-  <h2 class="text-muted" style="display: inline-block;">Current Employees </h2><br />
+  <h2 class="text-muted" style="display: inline-block;" >Current Employees </h2><br />
   <a class="btn btn-secondary bg-info border border-light" style="float: right;" href="/new">Add New</a>
   <br /><br />
 
@@ -18,9 +18,7 @@
         <td class="text-muted"><%= employee.firstName %></td>
         <td class="text-muted"><%= employee.lastName %></td>
         <td style="text-align: center" class="bg-white">
-          <a class="text-info" href="" style="text-decoration: none;">
-            <i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>
-          </a>
+          <a class="text-info" href="/view/<%= employee.lastName %>" style="text-decoration: none;">View</a>
         </td>
       </tr>
       <% }) %>

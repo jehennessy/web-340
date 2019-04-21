@@ -86,6 +86,23 @@ app.get('/new', function(req, res) {
   });
 })
 
+app.get("/view/:queryName", function(req, res) {
+  var queryName = req.params.queryName;
+  Employee.find({'lastName': queryName}, function(error, employees) {
+    if (error) throw error;
+    console.log(employees);
+    if(employees.length > 0) {
+      res.render("view", {
+        title: "Employee Record",
+        employee: employees
+      })
+    }
+    else {
+      res.redirect("/");
+    }
+  });
+});
+
 
 app.post("/process", function(req,res) {
   if(!req.body.firstName || !req.body.lastName){
